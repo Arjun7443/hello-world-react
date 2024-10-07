@@ -9,7 +9,7 @@ pipeline {
     stage('Checkout') {
       steps {
         sh 'echo passed'
-        //git branch: 'main', url: 'https://github.com/iam-veeramalla/Jenkins-Zero-To-Hero.git'
+        //git branch: 'main', url: 'https://github.com/arjun7443/hello-world-react'
       }
     }
     stage('Build and Test') {
@@ -44,10 +44,10 @@ pipeline {
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                 sh '''
                     git config user.email "nagarjuna7443@gmail.com"
-                    git config user.name "Abhishek Veeramalla"
+                    git config user.name "Nagarjuna Patharlapati"
                     BUILD_NUMBER=${BUILD_NUMBER}
-                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" hello-world-react/deployment.yml
-                    git add hello-world-react/deployment.yml
+                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" hello-world-react-manifests/deployment.yml
+                    git add hello-world-react-manifests/deployment.yml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                     git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
                 '''
